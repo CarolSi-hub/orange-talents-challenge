@@ -1,8 +1,9 @@
 package com.example.demo.domain;
-
-import java.sql.Date;
-
+import java.util.Date;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @EntityListeners(EntityListeners.class)
@@ -10,20 +11,24 @@ import javax.validation.constraints.NotNull;
 @Table(name = "usuarios")
 public class Usuario {
 	
-	@Id
+	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private int id;
 
 	  @Column
 	  @NotNull
+	  @NotBlank
 	  private String nome;
 
 	  @Column(unique=true)
-	  @NotNull	  
+	  @NotNull
+	  @NotBlank
+	  @Email
 	  private String email;
 
 	  @Column(unique=true)
 	  @NotNull
+	  @NotBlank
 	  private String cpf;
 
 	  @Column
@@ -81,40 +86,4 @@ public class Usuario {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nascimento == null) {
-			if (other.nascimento != null)
-				return false;
-		} else if (!nascimento.equals(other.nascimento))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}  
-
-
 }

@@ -1,8 +1,12 @@
 package com.example.demo.controller;
 
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,17 +23,14 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@GetMapping
-	public List <Usuario> listarTodos(){
+	@GetMapping		
+	public List <Usuario> listarTodos() throws SQLException{
 		return usuarioRepository.findAll();
-	}
-	
+	}	
 
-	@PostMapping
-	public Usuario cadastrarUsuario (@RequestBody Usuario usuario) {
-		Usuario usuarioCadastrado = usuarioRepository.save(usuario);
-		return usuarioRepository.save(usuarioCadastrado);	
+	@PostMapping	
+	public ResponseEntity<Usuario> cadastrarUsuario (@RequestBody @Valid Usuario usuario) throws SQLException {
+    	Usuario usuarioCadastrado = usuarioRepository.save(usuario);
+    	return ResponseEntity.created(null).body(usuarioCadastrado);
 	}
-	
-
 }

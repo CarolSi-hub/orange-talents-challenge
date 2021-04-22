@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
@@ -24,29 +25,37 @@ public class Endereco {
 	
 	 @Column
 	 @NotNull
+	 @NotBlank
 	  private String logradouro;
 
 	  @Column	
 	  @NotNull
+		@NotBlank
 	  private int numero;
 
 	  @Column
 	  @NotNull
+		@NotBlank
 	  private String complemento;
 
 	  @Column
 	  @NotNull
+		@NotBlank
 	  private String bairro;
 
 	  @Column	 
 	  @NotNull
+		@NotBlank
 	  private String cidade;
 
 	  @Column
 	  @NotNull
+		@NotBlank
 	  private String estado;
 	  
 	  @ManyToOne
+		@NotNull
+		@NotBlank
 	  @JoinColumn(name="id_usuarios")
 		private Usuario usuario;
 	
@@ -129,53 +138,6 @@ public class Endereco {
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Endereco other = (Endereco) obj;
-		if (bairro == null) {
-			if (other.bairro != null)
-				return false;
-		} else if (!bairro.equals(other.bairro))
-			return false;
-		if (cidade == null) {
-			if (other.cidade != null)
-				return false;
-		} else if (!cidade.equals(other.cidade))
-			return false;
-		if (complemento == null) {
-			if (other.complemento != null)
-				return false;
-		} else if (!complemento.equals(other.complemento))
-			return false;
-		if (estado == null) {
-			if (other.estado != null)
-				return false;
-		} else if (!estado.equals(other.estado))
-			return false;
-		if (id != other.id)
-			return false;
-		if (logradouro == null) {
-			if (other.logradouro != null)
-				return false;
-		} else if (!logradouro.equals(other.logradouro))
-			return false;
-		if (numero != other.numero)
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
-		return true;
-	}
-
 	
 	  
 }
