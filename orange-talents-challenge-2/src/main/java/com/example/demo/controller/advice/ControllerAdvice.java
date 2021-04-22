@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.sql.SQLException;
+
 public class ControllerAdvice {
 	 @ExceptionHandler(MethodArgumentNotValidException.class)
 	    @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -28,5 +30,12 @@ public class ControllerAdvice {
 	    public String handleResourceNotFoundException(ResourceNotFoundException ex) {
 	        return ex.getMessage();
 	    }
+	    
+	    @ExceptionHandler(SQLException.class)
+	    @ResponseStatus(HttpStatus.BAD_REQUEST)
+	    public String handleSQLException(ResourceNotFoundException ex) {
+	        return ex.getMessage();
+	    }
+	   
 
 }
