@@ -3,7 +3,7 @@
 ### Tecnologias utilizadas: 
   - Java 8
   - Spring Boot
-  - Jps Repository
+  - Jpa Repository
   - Banco de dados: PostgresSQL
 
 ## Aplicação para cadastro de usuário e seus endereços
